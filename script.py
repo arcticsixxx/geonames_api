@@ -3,7 +3,7 @@ import sqlite3
 import pendulum
 from googletrans import Translator
 from transliterate import translit
-from flask import Flask, abort
+from flask import Flask
 from flask_restful import Api, Resource, request
 
 
@@ -142,7 +142,8 @@ class GeoInfo(Resource):
         response = geobase.getby_geonameid(geonameid)
         if response:
             return dict(*response)
-        abort(404, "This geoname id is not valid")
+        return {"message": "This geoname id is not valid"}, 400
+
 
 class Pages(Resource):
     '''This API-method gets number of page and amount of cities and returns 
@@ -162,7 +163,8 @@ class Pages(Resource):
         response = geobase.show_obj_on_page(first_element, last_element)
         if response:
             return {"results": response}
-        abort(404, "Invalid page")
+        return {"message": "Invalid page"}, 400
+        
 
 class CityCompare(Resource):
     '''Method gets names of two cities(on Russian) and gets info about it,
@@ -191,7 +193,7 @@ class CityCompare(Resource):
                 "timezone": timezone_ch,
                 "time_difference": time_difference
                 }
-        abort(404, "Invalid request")
+        return {"message": "Invalid request"}, 400
 
 class Matches(Resource):
     '''This API method returns all variants 
@@ -207,7 +209,7 @@ class Matches(Resource):
             response[i] = all_matches[i]['name'] 
         if response:
             return response
-        abort(404, 'Invalid request')
+        return {"message": "Invalid request"}, 400
 
 geobase = DataBase()
 api.add_resource(GeoInfo, "/api/geoinfo/<string:geonameid>")
