@@ -128,8 +128,10 @@
 <code>GET api/city_compare</code> - вернет полную информацию о сравниваемых населенных пунктах, а также информацию о временной зоне, и о том какой населенный пункт севернее
 
 Парметры <code>?city1</code> - первый населенный пункт и <code>?city2</code> - второй населенный пункт
-<code>"northeren"</code> - Возвращает город, расположенный севернее
-<code>"timezone"</code> - Возвращает True, если временная зона городов совпадает, иначе False
+
+* <code>"northeren"</code> - Возвращает город, расположенный севернее
+* <code>"timezone"</code> - Возвращает True, если временная зона городов совпадает, иначе False
+* <code>"time_difference"</code> - Возвращает абсолютную разность во времени между двумя городами
 
 ### Пример запроса
 <code>GET api/city_compare?city1=Явидово&city2=Житниково</code>
@@ -138,52 +140,53 @@
 Успешный ответ приходит с кодом <code>200 OK</code> и содержит тело:
 ```json
 {
-    "city1": {
-        "id": 23,
-        "geonameid": 451769,
-        "name": "Yavidovo",
-        "asciiname": "Yavidovo",
-        "alternatenames": "Javidovo,Yavidovo,\u042f\u0432\u0438\u0434\u043e\u0432\u043e",
-        "latitude": 56.87068,
-        "longitude": 34.51994,
-        "feature_class": "P",
-        "feature_code": "PPL",
-        "country_code": "RU",
-        "cc2": "",
-        "admin1_code": "77",
-        "admin2_code": "",
-        "admin3_code": "",
-        "admin4_code": "",
-        "population": 0,
-        "elevation": "",
-        "dem": 217,
-        "timezone": "Europe/Moscow",
-        "modification_date": "2012-01-16\n"
-    },
-    "city2": {
-        "id": 5,
-        "geonameid": 451751,
-        "name": "Zhitnikovo",
-        "asciiname": "Zhitnikovo",
-        "alternatenames": "",
-        "latitude": 57.20064,
-        "longitude": 34.57831,
-        "feature_class": "P",
-        "feature_code": "PPL",
-        "country_code": "RU",
-        "cc2": "",
-        "admin1_code": "77",
-        "admin2_code": "",
-        "admin3_code": "",
-        "admin4_code": "",
-        "population": 0,
-        "elevation": "",
-        "dem": 198,
-        "timezone": "Europe/Moscow",
-        "modification_date": "2011-07-09\n"
-    },
-    "northeren": "\u0416\u0438\u0442\u043d\u0438\u043a\u043e\u0432\u043e",
-    "timezone": true
+  "city1": {
+      "id": 64198,
+      "geonameid": 524901,
+      "name": "Moscow",
+      "asciiname": "Moscow",
+      "alternatenames": "MOW,Maeskuy,Maskav,Maskava,Maskva,Mat-xco-va,Matxcova,Matxcơva,Mosca,Moscfa,Moscha,Mosco,Moscou,Moscova,Moscovo,Moscow,Moscoƿ,Moscu,Moscua,Moscòu,Moscó,Moscù,Moscú,Moskva,Moska,Moskau,Mosko,Moskokh,Moskou,Moskov,Moskova,Moskovu,Moskow,Moskowa,Mosku,Moskuas,Moskva,Moskvo,Moskwa,Moszkva,Muskav,Musko,Mát-xcơ-va,Mòskwa,Məskeu,Məskəү,masko,maskw,mo si ke,moseukeuba,mosko,mosukuwa,mskw,mwskva,mwskw,mwsqbh,mx s ko,Μόσχα,Мæскуы,Маскав,Масква,Москва,Москова,Москох,Москъва,Мускав,Муско,Мәскеу,Мәскәү,Մոսկվա,מאָסקװע,מאסקווע,מוסקבה,ماسکو,مسکو,موسكو,موسكۋا,ܡܘܣܩܒܐ,मास्को,मॉस्को,মস্কো,மாஸ்கோ,มอสโก,མོ་སི་ཁོ།,მოსკოვი,ሞስኮ,モスクワ,莫斯科,모스크바",
+      "latitude": 55.75222,
+      "longitude": 37.61556,
+      "feature_class": "P",
+      "feature_code": "PPLC",
+      "country_code": "RU",
+      "cc2": "",
+      "admin1_code": "48",
+      "admin2_code": "",
+      "admin3_code": "",
+      "admin4_code": "",
+      "population": 10381222,
+      "elevation": "",
+      "dem": 144,
+      "timezone": "Europe/Moscow",
+      "modification_date": "2020-03-31\n"
+  },
+  "city2": {
+      "id": 164479,
+      "geonameid": 1489425,
+      "name": "Tomsk",
+      "asciiname": "Tomsk",
+      "alternatenames": "TOF,Tom'sku,Tomck,Tomium,Toms'k,Tomsk,Tomska,Tomskaj,Tomskas,Tomszk,Tomçk,tomseukeu,tomska,tomusuku,tuo mu si ke,twmsk,twmsq,Τομσκ,Томск,Томскай,Томськ,Томьскъ,Տոմսկ,טומסק,تومسك,تومسک,ٹومسک,तोम्स्क,トムスク,托木斯克,톰스크",
+      "latitude": 56.49771,
+      "longitude": 84.97437,
+      "feature_class": "P",
+      "feature_code": "PPLA",
+      "country_code": "RU",
+      "cc2": "",
+      "admin1_code": "75",
+      "admin2_code": "1489419",
+      "admin3_code": "",
+      "admin4_code": "",
+      "population": 485519,
+      "elevation": "",
+      "dem": 117,
+      "timezone": "Asia/Tomsk",
+      "modification_date": "2019-09-05\n"
+  },
+    "northeren": "Томск",
+    "timezone": false,
+    "time_difference": 4
 }
 ```
 
@@ -193,49 +196,47 @@
 Параметры <code>?city</code> - Строчка, содержащая часть названия населенного пункта
 
 ### Пример запроса
-<code>GET api/get_matches?city=Tom</code>
+<code>GET api/get_matches?city=Томс</code>
 
 ### Ответ
 Успешный ответ приходит с кодом <code>200 OK</code> и содержит тело:
 ```json
 {
-    "0": "Vasil’-Tomashëvka",
-    "1": "Tomzhen’ga",
-    "2": "Tomyz’",
-    "3": "Tomyz’",
-    "4": "Tomyshevka",
-    "5": "Stantsiya Tomylovo",
-    "6": "Tomylovo",
-    "7": "Bol’shoye Tomylovo",
-    "8": "Tomuzlovskoye",
-    "9": "Tomuzlovskoye",
-    "10": "Tomuzlovka",
-    "11": "Ozero Tomut",
-    "12": "Tomsino",
-    "13": "Tomlenaya",
-    "14": "Stantsiya Tomitsy",
-    "15": "Tominga",
-    "16": "Tomilino",
-    "17": "Tomilino",
-    "18": "Tomba",
-    "19": "Tomazy",
-    "20": "Tomazov",
-    "21": "Tomashi",
-    "22": "Stantsiya Tomashëvo",
-    "23": "Tomasha",
-    "24": "Tomasha",
-    "25": "Tomasha",
-    "26": "Mys Tomasa",
-    "27": "Tomorovo",
-    "28": "Tomarovo",
-    "29": "Tomarovo",
-    "30": "Tomarovo",
-    "31": "Tomarovka",
-    "32": "Ostrov Toma",
-    "33": "Toma",
-    "34": "Tom",
-    "35": "Tomilin Kolodez’",
-    ...
+  "0": "Tomsino",
+  "1": "Tomsharovo",
+  "2": "Stantsiya Tomsk Vtoroy",
+  "3": "Stantsiya Tomsk Pervyy",
+  "4": "Tomskoye",
+  "5": "Tomskiy Rayon",
+  "6": "Tomskiy Khutor",
+  "7": "Tomsk Oblast",
+  "8": "Tomskaya",
+  "9": "Tomskaya",
+  "10": "Tomskaya",
+  "11": "Tomsk",
+  "12": "Ozero Bol’shoye Tomskoye",
+  "13": "Ozero Maloye Tomskoye",
+  "14": "Tomskiy",
+  "15": "Tomskoye",
+  "16": "Tomskoye",
+  "17": "Tomsyu",
+  "18": "Ostrov Tomskiy",
+  "19": "Tomsha",
+  "20": "Tomsko-Obskaya Lesnaya Dacha",
+  "21": "Ozero Tomskoye",
+  "22": "Urochishche Tomshina",
+  "23": "Tomsino",
+  "24": "Ozero Tomsino",
+  "25": "Tomsha",
+  "26": "Tomskiy",
+  "27": "Tomsk Bogashevo Airport",
+  "28": "Gora Tomskaya",
+  "29": "Stantsiya Tomsk-Severnyy",
+  "30": "Meriya Goroda Tomska",
+  "31": "Duma Goroda Tomska",
+  "32": "Tomskaya Tamozhnya",
+  "33": "Tomskiy Oblastnoy Sud",
+  "34": "Tomsk"
 }
 ```
 
