@@ -1,8 +1,11 @@
 import os
 import sqlite3
+import pendulum
 from googletrans import Translator
+from transliterate import translit
 from flask import Flask, abort
 from flask_restful import Api, Resource, request
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -144,7 +147,6 @@ class GeoInfo(Resource):
 class Pages(Resource):
     '''This API-method gets number of page and amount of cities and returns 
         the page with info about these cities'''
-    
     def get(self):
         page = request.args.get('page')
         cities_amount = request.args.get('amount')
@@ -178,12 +180,16 @@ class CityCompare(Resource):
                 cities1[0]['latitude'] > cities2[0]['latitude']) else city2
             timezone_ch = True if (
                 cities1[0]['timezone'] == cities2[0]['timezone']) else False
-            print(*cities1)
+            '''By using lib pendulum we can get the timedelta between two cities'''
+            city1_time = pendulum.now(cities1[0].get('timezone'))
+            city2_time = city1_time.in_timezone(cities2[0].get('timezone'))
+            time_difference = abs(city1_time.hour - city2_time.hour)
             return {
                 "city1": dict(*cities1),
                 "city2": dict(*cities2),
                 "northeren": northeren_ch,
-                "timezone": timezone_ch
+                "timezone": timezone_ch,
+                "time_difference": time_difference
                 }
         abort(404, "Invalid request")
 
@@ -192,11 +198,16 @@ class Matches(Resource):
         for continuing the name'''
     def get(self):
         substring = request.args.get('city')
-        all_matches = geobase.find_matches(substring)
+        '''Here we used module translit because we need 
+            to transliterate param, not to translate'''
+        substring_en = translit(substring, language_code='ru', reversed=True)
+        all_matches = geobase.find_matches(substring_en)
         response = dict()
         for i in range(len(all_matches)):
             response[i] = all_matches[i]['name'] 
-        return response
+        if response:
+            return response
+        abort(404, 'Invalid request')
 
 geobase = DataBase()
 api.add_resource(GeoInfo, "/api/geoinfo/<string:geonameid>")
